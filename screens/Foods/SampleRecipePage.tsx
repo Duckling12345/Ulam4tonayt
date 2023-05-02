@@ -1,5 +1,5 @@
 import { Dimensions,ImageBackground,SafeAreaView, ScrollView,StyleSheet,Text,TouchableOpacity,View,} from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -8,9 +8,30 @@ import Spacing from "../../constants/Spacing";
 const { height } = Dimensions.get("window");
 import { Ionicons } from "@expo/vector-icons";
 import Colors from '../../constants/Colors';
+import AsyncStorage from '@react-native-community/async-storage';
 
-
-const SampleRecipePage = ({ recipes }) => {
+function SampleRecipePage ({ recipes }) {
+  const [bookmark, setbookmark] = useState(false);
+  const saveBookMark = async recipes => {
+       setbookmark(true); 
+       await AsyncStorage.getItem('bookmark').then(token => {
+           const res = JSON.parse(token);
+           if (res !== null) {
+               let data = res.find(value => value === recipes);
+               if (data == null) {
+                   res.push(recipes);
+                   AsyncStorage.setItem('bookmark', JSON.stringify(res));
+                   alert('You have bookmarked this recipe');
+               }
+           } else {
+               let bookmark = [];
+               bookmark.push(recipes);
+               AsyncStorage.setItem('bookmark', JSON.stringify(bookmark));
+                   alert('You have bookmarkeds this recipe');
+           }
+       });
+   };
+ 
   return (
     <>
       <ScrollView>
@@ -215,7 +236,7 @@ const SampleRecipePage = ({ recipes }) => {
               justifyContent: "center",
               borderRadius: Spacing * 2,
             }}
-          >
+          onPress={() => saveBookMark(recipes.name)}>
             <Text
               style={{
                 fontSize: Spacing * 2,
@@ -230,7 +251,7 @@ const SampleRecipePage = ({ recipes }) => {
       </SafeAreaView>
     </>
   );
-};
+}
 
 export default SampleRecipePage;
 

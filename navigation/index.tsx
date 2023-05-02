@@ -18,6 +18,7 @@ import Bulalo from "../screens/Foods/Bulalo";
 import  Pinakbet from "../screens/Foods/Pinakbet";
 import { RootStackParamList } from "../types";
 import BottomNavigator from "../screens/BottomNavigator";
+import Profile from "../screens/Profile";
 const theme = {
   ...DefaultTheme,
   colors: {
@@ -59,7 +60,7 @@ function RootNavigator() {
       <Stack.Screen name="Kalders" component={Kaldereta}/>
       <Stack.Screen name="Pinakbers" component={Pinakbet}/>
       <Stack.Screen name="Tinols" component={Tinola}/>
-
+      <Stack.Screen name="Profile" component={Profile}/>
     </Stack.Navigator>
   );
 }

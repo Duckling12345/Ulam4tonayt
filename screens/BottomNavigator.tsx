@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from "react";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../constants/Colors';
@@ -7,7 +7,7 @@ import {View} from 'react-native';
 import Home from '../screens/Homepage';
 import Roulette from '../screens/Roulette';
 import Login from '../screens/LoginScreen';
-
+import Profile from '../screens/Profile';
 const Tab = createBottomTabNavigator();
 
 const BottomNavigator = () => {
@@ -45,7 +45,7 @@ const BottomNavigator = () => {
  
       <Tab.Screen
         name="User"
-        component={Login}
+        component={Profile}
         options={{
           tabBarIcon: ({color}) => (
             <Icon name="user-circle" color={color} size={28} />

@@ -3,14 +3,15 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import fonts from "./config/fonts";
 import Navigation from "./navigation";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
-  const [fontsLoaded] = useFonts(fonts);
-
+const [fontsLoaded] = useFonts(fonts);
   return !fontsLoaded ? null : (
     <SafeAreaProvider>
       <Navigation />
       <StatusBar />
     </SafeAreaProvider>
+    
   );
 }
